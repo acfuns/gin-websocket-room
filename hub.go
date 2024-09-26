@@ -1,6 +1,7 @@
 package main
 
 type Hub struct {
+	id      int
 	clients map[*Client]bool
 
 	broadcast  chan []byte
@@ -8,8 +9,9 @@ type Hub struct {
 	unregister chan *Client
 }
 
-func NewHub() *Hub {
+func NewHub(id int) *Hub {
 	return &Hub{
+		id:         id,
 		broadcast:  make(chan []byte),
 		register:   make(chan *Client),
 		unregister: make(chan *Client),
